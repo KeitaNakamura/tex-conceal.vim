@@ -1,3 +1,5 @@
+" Original file is https://github.com/wjakob/wjakob.vim/blob/master/after/syntax/tex.vim
+
 if has('conceal')
 	" More paper specific (what to do with these??)
 	syn match texMathSymbol '\\pathspace' contained conceal cchar=Ω
