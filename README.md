@@ -22,5 +22,5 @@ Plug   'KeitaNakamura/tex-conceal.vim', {'for': 'tex'} " for VimPlug
 ## Recommend settings
 ```vim:~/.vimrc
 set conceallevel=2
-let g:tex_conceal="adgm"
+let g:tex_conceal="abdgm"
 ```
