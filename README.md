@@ -14,7 +14,9 @@
 
 ## Instllation
 ```vim:~/.vimrc
-Plugin 'KeitaNakamura/tex-conceal.vim'
+Plugin 'KeitaNakamura/tex-conceal.vim'                 " for Vundle
+or
+Plug   'KeitaNakamura/tex-conceal.vim', {'for': 'tex'} " for VimPlug
 ```
 
 ## Recommend settings
