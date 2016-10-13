@@ -1,5 +1,7 @@
 # tex-conceal.vim
 
+This plugin extends the Conceal feature of Vim for LaTeX.
+
 ### Without conceal
 <img src="https://github.com/KeitaNakamura/tex-conceal.vim/blob/master/normal.png" width="800">
 
