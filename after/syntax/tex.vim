@@ -204,8 +204,9 @@ if has('conceal')
 
 	set ambiwidth=single
   hi texBoldMathText ctermfg=4 guifg=white cterm=bold gui=bold
-  hi texRefZone ctermfg=4
-  hi texInputFile ctermfg=4
-  hi texMathZoneE ctermfg=4
-  hi texMathZoneX ctermfg=4
+  " hi! link texBoldMathText texMathh
+  " hi texRefZone ctermfg=4
+  " hi texInputFile ctermfg=4
+  " hi texMathZoneE ctermfg=4
+  " hi texMathZoneX ctermfg=4
 endif
