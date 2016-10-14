@@ -203,10 +203,5 @@ if has('conceal')
 	" syn region texItalStyle	 matchgroup=texTypeStyle start="\\emph\s*{" end="}" concealends contains=@texItalGroup
 
 	set ambiwidth=single
-  hi texBoldMathText ctermfg=4 guifg=white cterm=bold gui=bold
-  " hi! link texBoldMathText texMathh
-  " hi texRefZone ctermfg=4
-  " hi texInputFile ctermfg=4
-  " hi texMathZoneE ctermfg=4
-  " hi texMathZoneX ctermfg=4
+  hi texBoldMathText cterm=bold gui=bold
 endif
