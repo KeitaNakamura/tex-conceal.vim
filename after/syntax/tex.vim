@@ -195,7 +195,7 @@ if has('conceal')
 	 syn region texMathText matchgroup=texStatement start='\\\(\(inter\)\=text\|mbox\|mathrm\)\s*{'	end='}'	concealends keepend contains=@texFoldGroup containedin=texMathMatcher
 	endif
 
-	syn region texBoldMathText matchgroup=texStatement start='\\\(mathbf\|bm\){' end='}' concealends contains=@texMathZoneGroup containedin=texMathMatcher
+	syn region texBoldMathText matchgroup=texStatement start='\\\(mathbf\|bm\|symbf\){' end='}' concealends contains=@texMathZoneGroup containedin=texMathMatcher
  	syn cluster texMathZoneGroup add=texBoldMathText
 
 	syn region texBoldItalStyle	matchgroup=texTypeStyle start="\\emph\s*{" end="}" concealends contains=@texItalGroup
