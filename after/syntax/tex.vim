@@ -1,5 +1,3 @@
-" Original file is https://github.com/wjakob/wjakob.vim/blob/master/after/syntax/tex.vim
-
 if has('conceal')
   " More paper specific (what to do with these??)
   syn match texMathSymbol '\\pathspace' contained conceal cchar=Ω
@@ -86,6 +84,33 @@ if has('conceal')
   syn match texMathSymbol '\\mathbb{X}' contained conceal cchar=𝕏
   syn match texMathSymbol '\\mathbb{Y}' contained conceal cchar=𝕐
   syn match texMathSymbol '\\mathbb{Z}' contained conceal cchar=ℤ
+
+  syn match texMathSymbol '\\mathbbm{A}' contained conceal cchar=𝔸
+  syn match texMathSymbol '\\mathbbm{B}' contained conceal cchar=𝔹
+  syn match texMathSymbol '\\mathbbm{C}' contained conceal cchar=ℂ
+  syn match texMathSymbol '\\mathbbm{D}' contained conceal cchar=𝔻
+  syn match texMathSymbol '\\mathbbm{E}' contained conceal cchar=𝔼
+  syn match texMathSymbol '\\mathbbm{F}' contained conceal cchar=𝔽
+  syn match texMathSymbol '\\mathbbm{G}' contained conceal cchar=𝔾
+  syn match texMathSymbol '\\mathbbm{H}' contained conceal cchar=ℍ
+  syn match texMathSymbol '\\mathbbm{I}' contained conceal cchar=𝕀
+  syn match texMathSymbol '\\mathbbm{J}' contained conceal cchar=𝕁
+  syn match texMathSymbol '\\mathbbm{K}' contained conceal cchar=𝕂
+  syn match texMathSymbol '\\mathbbm{L}' contained conceal cchar=𝕃
+  syn match texMathSymbol '\\mathbbm{M}' contained conceal cchar=𝕄
+  syn match texMathSymbol '\\mathbbm{N}' contained conceal cchar=ℕ
+  syn match texMathSymbol '\\mathbbm{O}' contained conceal cchar=𝕆
+  syn match texMathSymbol '\\mathbbm{P}' contained conceal cchar=ℙ
+  syn match texMathSymbol '\\mathbbm{Q}' contained conceal cchar=ℚ
+  syn match texMathSymbol '\\mathbbm{R}' contained conceal cchar=ℝ
+  syn match texMathSymbol '\\mathbbm{S}' contained conceal cchar=𝕊
+  syn match texMathSymbol '\\mathbbm{T}' contained conceal cchar=𝕋
+  syn match texMathSymbol '\\mathbbm{U}' contained conceal cchar=𝕌
+  syn match texMathSymbol '\\mathbbm{V}' contained conceal cchar=𝕍
+  syn match texMathSymbol '\\mathbbm{W}' contained conceal cchar=𝕎
+  syn match texMathSymbol '\\mathbbm{X}' contained conceal cchar=𝕏
+  syn match texMathSymbol '\\mathbbm{Y}' contained conceal cchar=𝕐
+  syn match texMathSymbol '\\mathbbm{Z}' contained conceal cchar=ℤ
 
   syn match texBoldMathText '\\mA\>' contained conceal cchar=A
   syn match texBoldMathText '\\mB\>' contained conceal cchar=B
@@ -187,6 +212,9 @@ if has('conceal')
   "syn match texStatement '\\\[' contained conceal cchar=⟦
   "syn match texStatement '\\\]' contained conceal cchar=⟧
 
+  " Generic symbols
+  syn match texMathSymbol '\\colon' contained conceal cchar=:
+
   " hide \text delimiter etc inside math mode
   if !exists("g:tex_nospell") || !g:tex_nospell
     syn region texMathText matchgroup=texStatement start='\\\(\(inter\)\=mathrm\)\s*{'     end='}' concealends keepend contains=@texFoldGroup containedin=texMathMatcher
@@ -194,6 +222,8 @@ if has('conceal')
   else
     syn region texMathText matchgroup=texStatement start='\\\(\(inter\)\=text\|mbox\|mathrm\)\s*{' end='}' concealends keepend contains=@texFoldGroup containedin=texMathMatcher
   endif
+
+  syn region texMathText matchgroup=texStatement start='\\\(\(inter\)\=limits\)' end='' concealends keepend contains=@texFoldGroup containedin=texMathMatcher
 
   syn region texBoldMathText matchgroup=texStatement start='\\\(mathbf\|bm\|symbf\){' end='}' concealends contains=@texMathZoneGroup containedin=texMathMatcher
   syn cluster texMathZoneGroup add=texBoldMathText
