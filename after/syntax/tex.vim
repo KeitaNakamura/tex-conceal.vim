@@ -138,7 +138,6 @@ if has('conceal')
   syn match texBoldMathText '\\mX\>' contained conceal cchar=X
   syn match texBoldMathText '\\mY\>' contained conceal cchar=Y
   syn match texBoldMathText '\\mZ\>' contained conceal cchar=Z
-
   syn match texBoldMathText '\\va\>' contained conceal cchar=a
   syn match texBoldMathText '\\vb\>' contained conceal cchar=b
   syn match texBoldMathText '\\vc\>' contained conceal cchar=c
@@ -194,6 +193,32 @@ if has('conceal')
   syn match texMathSymbol '\\mathscr{X}' contained conceal cchar=𝓧
   syn match texMathSymbol '\\mathscr{Y}' contained conceal cchar=𝓨
   syn match texMathSymbol '\\mathscr{Z}' contained conceal cchar=𝓩
+  syn match texMathSymbol '\\mathscr{a}' contained conceal cchar=𝓪
+  syn match texMathSymbol '\\mathscr{b}' contained conceal cchar=𝓫
+  syn match texMathSymbol '\\mathscr{c}' contained conceal cchar=𝓬
+  syn match texMathSymbol '\\mathscr{d}' contained conceal cchar=𝓭
+  syn match texMathSymbol '\\mathscr{e}' contained conceal cchar=𝓮
+  syn match texMathSymbol '\\mathscr{f}' contained conceal cchar=𝓯
+  syn match texMathSymbol '\\mathscr{g}' contained conceal cchar=𝓰
+  syn match texMathSymbol '\\mathscr{h}' contained conceal cchar=𝓱
+  syn match texMathSymbol '\\mathscr{i}' contained conceal cchar=𝓲
+  syn match texMathSymbol '\\mathscr{j}' contained conceal cchar=𝓳
+  syn match texMathSymbol '\\mathscr{k}' contained conceal cchar=𝓴
+  syn match texMathSymbol '\\mathscr{l}' contained conceal cchar=𝓵
+  syn match texMathSymbol '\\mathscr{m}' contained conceal cchar=𝓶
+  syn match texMathSymbol '\\mathscr{n}' contained conceal cchar=𝓷
+  syn match texMathSymbol '\\mathscr{o}' contained conceal cchar=𝓸
+  syn match texMathSymbol '\\mathscr{p}' contained conceal cchar=𝓹
+  syn match texMathSymbol '\\mathscr{q}' contained conceal cchar=𝓺
+  syn match texMathSymbol '\\mathscr{r}' contained conceal cchar=𝓻
+  syn match texMathSymbol '\\mathscr{s}' contained conceal cchar=𝓼
+  syn match texMathSymbol '\\mathscr{t}' contained conceal cchar=𝓽
+  syn match texMathSymbol '\\mathscr{u}' contained conceal cchar=𝓾
+  syn match texMathSymbol '\\mathscr{v}' contained conceal cchar=𝓿
+  syn match texMathSymbol '\\mathscr{w}' contained conceal cchar=𝔀
+  syn match texMathSymbol '\\mathscr{x}' contained conceal cchar=𝔁
+  syn match texMathSymbol '\\mathscr{y}' contained conceal cchar=𝔂
+  syn match texMathSymbol '\\mathscr{z}' contained conceal cchar=𝔃
 
   syn match texStatement '``' contained conceal cchar=“
   syn match texStatement '\'\'' contained conceal cchar=”
@@ -205,10 +230,16 @@ if has('conceal')
   syn match texMathSymbol '\\coloneqq\>' contained conceal cchar=≔
   syn match texMathSymbol '\\,' contained conceal cchar= 
   syn match texMathSymbol '\\ ' contained conceal cchar= 
-  syn match texMathSymbol '\\quad' contained conceal cchar= 
+  syn match texMathSymbol '\\quad' contained conceal cchar=　
+  syn match texMathSymbol '\\qquad' contained conceal cchar=　
   syn match texMathSymbol '\\sqrt' contained conceal cchar=√
   syn match texMathSymbol '\\where\>' contained conceal cchar=|
+  syn match texMathSymbol '\\;' contained conceal cchar= 
+  syn match texMathSymbol '\\:' contained conceal cchar= 
+  syn match texMathSymbol '\\\@<!\~' contained conceal cchar= 
   syn match texMathSymbol '\\\!' contained conceal
+  syn match texMathSymbol '\\displaystyle' contained conceal
+  syn match texMathSymbol '\\middle' contained conceal
   "syn match texStatement '\\\[' contained conceal cchar=⟦
   "syn match texStatement '\\\]' contained conceal cchar=⟧
 
@@ -225,7 +256,7 @@ if has('conceal')
 
   syn region texMathText matchgroup=texStatement start='\\\(\(inter\)\=limits\)' end='' concealends keepend contains=@texFoldGroup containedin=texMathMatcher
 
-  syn region texBoldMathText matchgroup=texStatement start='\\\(mathbf\|bm\|symbf\){' end='}' concealends contains=@texMathZoneGroup containedin=texMathMatcher
+  syn region texBoldMathText matchgroup=texStatement start='\\\(mathbf\|bm\|symbf\|boldsymbol\|mathcal\){' end='}' concealends contains=@texMathZoneGroup containedin=texMathMatcher
   syn cluster texMathZoneGroup add=texBoldMathText
 
   syn region texBoldItalStyle     matchgroup=texTypeStyle start="\\emph\s*{" end="}" concealends contains=@texItalGroup
