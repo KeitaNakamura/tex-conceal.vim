@@ -240,6 +240,7 @@ if has('conceal')
   syn match texMathSymbol '\\\!' contained conceal
   syn match texMathSymbol '\\displaystyle' contained conceal
   syn match texMathSymbol '\\middle' contained conceal
+  syn match texMathSymbol '\\\@<!&' contained conceal
   "syn match texStatement '\\\[' contained conceal cchar=⟦
   "syn match texStatement '\\\]' contained conceal cchar=⟧
 
