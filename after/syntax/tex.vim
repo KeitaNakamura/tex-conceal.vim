@@ -200,7 +200,10 @@ if has('conceal')
 
   syn region texBoldItalStyle     matchgroup=texTypeStyle start="\\emph\s*{" end="}" concealends contains=@texItalGroup
   syn region texItalStyle  matchgroup=texTypeStyle start="\\emph\s*{" end="}" concealends contains=@texItalGroup
+  syn region texMatcher matchgroup=texTypeStyle start="\\underline\s*{" end="}" concealends contains=@texItalGroup
 
   set ambiwidth=single
   hi texBoldMathText cterm=bold gui=bold
+  hi texUnderStyle cterm=underline gui=underline 
+  match texUnderStyle /\\underline{\zs\(.\([^\\]}\)\@<!\)\+\ze}/
 endif
