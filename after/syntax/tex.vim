@@ -303,10 +303,10 @@ if has('conceal')
 
   " hide \text delimiter etc inside math mode
   if !exists("g:tex_nospell") || !g:tex_nospell
-    syn region texMathText matchgroup=texStatement start='\\\(\(inter\)\=mathrm\)\s*{'     end='}' concealends keepend contains=@texFoldGroup containedin=texMathMatcher
+    syn region texMathText matchgroup=texStatement start='\\\(\(inter\)\=mathrm\|operatorname\|mathop\)\s*{'     end='}' concealends keepend contains=@texFoldGroup containedin=texMathMatcher
     syn region texMathText matchgroup=texStatement start='\\\(\(inter\)\=text\|mbox\)\s*{' end='}' concealends keepend contains=@texFoldGroup,@Spell containedin=texMathMatcher
   else
-    syn region texMathText matchgroup=texStatement start='\\\(\(inter\)\=text\|mbox\|mathrm\)\s*{' end='}' concealends keepend contains=@texFoldGroup containedin=texMathMatcher
+    syn region texMathText matchgroup=texStatement start='\\\(\(inter\)\=text\|mbox\|mathrm\|operatorname\|mathop\)\s*{' end='}' concealends keepend contains=@texFoldGroup containedin=texMathMatcher
   endif
 
   syn region texMathText matchgroup=texStatement start='\\\(\(inter\)\=limits\)' end='' concealends keepend contains=@texFoldGroup containedin=texMathMatcher
