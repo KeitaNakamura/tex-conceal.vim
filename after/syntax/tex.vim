@@ -71,6 +71,11 @@ syn match texMathSymbol '\\varrho\>' contained conceal cchar=ϱ
 syn match texMathSymbol '\\varsigma\>' contained conceal cchar=ς
 syn match texMathSymbol '\\varphi\>' contained conceal cchar=φ
 
+" physical symbols
+syn match texMathSymbol '\\hbar\>' contained conceal cchar=ℏ
+syn match texMathSymbol '\\otimes\>' contained conceal cchar=⊗
+syn match texMathSymbol '\\nabla\>' contained conceal cchar=∇
+
 " logical symbols
 syn match texMathSymbol '\\lor\>' contained conceal cchar=∨
 syn match texMathSymbol '\\land\>' contained conceal cchar=∧
@@ -78,6 +83,25 @@ syn match texMathSymbol '\\lnot\>' contained conceal cchar=¬
 syn match texMathSymbol '\\implies\>' contained conceal cchar=⇒
 syn match texMathSymbol '\\geqslant\>' contained conceal cchar=⩾
 syn match texMathSymbol '\\leqslant\>' contained conceal cchar=⩽
+syn match texMathSymbol '\\ge \>' contained conceal cchar=≥
+syn match texMathSymbol '\\le \>' contained conceal cchar=≤
+syn match texMathSymbol '\\ll \>' contained conceal cchar=≪
+syn match texMathSymbol '\\gg \>' contained conceal cchar=≫
+syn match texMathSymbol '\\approx \>' contained conceal cchar=≈
+syn match texMathSymbol '\\equiv \>' contained conceal cchar=≡
+syn match texMathSymbol '\\propto \>' contained conceal cchar=∝
+syn match texMathSymbol '\\perp\>' contained conceal cchar=⊥
+syn match texMathSymbol '\\cdot\>' contained conceal cchar=⋅
+syn match texMathSymbol '\\times\>' contained conceal cchar=×
+syn match texMathSymbol '\\mp \>' contained conceal cchar=∓
+syn match texMathSymbol '\\pm \>' contained conceal cchar=±
+
+syn match texMathSymbol '\\to \>' contained conceal cchar=→
+syn match texMathSymbol '\\sum\>' contained conceal cchar=∑
+syn match texMathSymbol '\\int\>' contained conceal cchar=∫
+syn match texMathSymbol '\\infty\>' contained conceal cchar=∞
+syn match texMathSymbol '\\right\>' contained conceal cchar= 
+syn match texMathSymbol '\\left\>' contained conceal cchar= 
 
 " \mathbb characters
 syn match texMathSymbol '\\mathbb{\s*A\s*}' contained conceal cchar=𝔸
