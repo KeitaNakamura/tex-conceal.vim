@@ -6,15 +6,21 @@ endif
 
 " more reasonably sized symbols that were already defined
 syn match texMathSymbol '\\Rightarrow\>' contained conceal cchar=⇒
+syn match texMathSymbol '\\Longrightarrow\>' contained conceal cchar=⟹
 syn match texMathSymbol '\\Leftarrow\>' contained conceal cchar=⇐
+syn match texMathSymbol '\\Longleftarrow\>' contained conceal cchar=⟸
 syn match texMathSymbol '\\rightarrow\>' contained conceal cchar=→
 syn match texMathSymbol '\\leftarrow\>' contained conceal cchar=←
+syn match texMathSymbol '\\longleftrightarrow\>' contained conceal cchar=⟷
 syn match texMathSymbol '\\emptyset\>' contained conceal cchar=Ø
+syn match texMathSymbol '\\varnothing\>' contained conceal cchar=∅
 syn match texMathSymbol '\\varphi\>' contained conceal cchar=φ
 syn match texMathSymbol '\\phi\>' contained conceal cchar=Φ
 syn match texMathSymbol '\\langle\>\s*' contained conceal cchar=⟨
 syn match texMathSymbol '\s*\\rangle\>' contained conceal cchar=⟩
 syn match texMathSymbol '\\\\' contained conceal cchar=⏎
+syn match texMathSymbol '\\lVert\>' contained conceal cchar=‖
+syn match texMathSymbol '\\rVert\>' contained conceal cchar=‖
 
 " logical symbols
 syn match texMathSymbol '\\lor\>' contained conceal cchar=∨
@@ -142,6 +148,10 @@ syn match texStatement '\\item\>' contained conceal cchar=•
 syn match texStatement '\\ldots' contained conceal cchar=…
 syn match texStatement '\\quad' contained conceal cchar=  
 syn match texStatement '\\qquad' contained conceal cchar=    
+syn match texStatement '\\:' contained conceal cchar= 
+syn match texStatement '\\;' contained conceal cchar= 
+syn match texStatement '\\,' contained conceal cchar= 
+syn match texStatement '\\ ' contained conceal cchar= 
 "syn match texStatement '\\\[' contained conceal cchar=⟦
 "syn match texStatement '\\\]' contained conceal cchar=⟧
 syn match texDelimiter '\\{' contained conceal cchar={
@@ -157,6 +167,7 @@ syn match texMathSymbol '\\quad' contained conceal cchar=
 syn match texMathSymbol '\\qquad' contained conceal cchar=    
 syn match texMathSymbol '\\sqrt' contained conceal cchar=√
 syn match texMathSymbol '\\\!' contained conceal
+syn match texMathSymbol '{}' contained conceal cchar= 
 
 " hide \text delimiter etc inside math mode
 if !exists("g:tex_nospell") || !g:tex_nospell
@@ -177,6 +188,10 @@ hi texBoldMathText cterm=bold gui=bold
 " set ambiwidth=single
 
 " Simple number super/sub-scripts
+syn match texMathSymbol '{(' contained conceal cchar=(
+syn match texMathSymbol ')}' contained conceal cchar=)
+syn match texMathSymbol '{\[' contained conceal cchar=[
+syn match texMathSymbol ']}' contained conceal cchar=]
 syn match texMathSymbol '\^\%(0\|{\s*0\s*}\)' contained conceal cchar=⁰
 syn match texMathSymbol '\^\%(1\|{\s*1\s*}\)' contained conceal cchar=¹
 syn match texMathSymbol '\^\%(2\|{\s*2\s*}\)' contained conceal cchar=²
