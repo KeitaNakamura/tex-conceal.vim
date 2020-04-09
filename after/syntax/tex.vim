@@ -188,11 +188,6 @@ hi texBoldMathText cterm=bold gui=bold
 " set ambiwidth=single
 
 " Simple number super/sub-scripts
-syn match texMathSymbol '{(' contained conceal cchar=(
-syn match texMathSymbol ')}' contained conceal cchar=)
-syn match texMathSymbol '{\[' contained conceal cchar=[
-syn match texMathSymbol ']}' contained conceal cchar=]
-syn match texMathSymbol '\^\%(0\|{\s*0\s*}\)' contained conceal cchar=⁰
 syn match texMathSymbol '\^\%(1\|{\s*1\s*}\)' contained conceal cchar=¹
 syn match texMathSymbol '\^\%(2\|{\s*2\s*}\)' contained conceal cchar=²
 syn match texMathSymbol '\^\%(3\|{\s*3\s*}\)' contained conceal cchar=³
