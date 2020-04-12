@@ -79,7 +79,7 @@ hi texBoldMathText cterm=bold gui=bold
 
 " set ambiwidth=single
 
-" -> fonts; TODO: spell check @Spell
+" -> TeX fonts; TODO: spell check @Spell
 syn cluster texMathZoneGroup add=texFont,texMathFont
 syn cluster texFoldGroup add=texFont
 syn cluster texMatchGroup add=texFont
@@ -105,7 +105,7 @@ call s:texFontCharConceal(1,'mathsf','texFontSansSerif','','')
 " -> super/sub-scripts
 let s:tex_superscripts='[0-9a-pr-zABDEG-PRTUW() \-=+,./<>]'
 let s:tex_subscripts='[0-9aeh-pr-vx() \-=+.,/]'
-"let s:tex_subscripts=exists("g:tex_subscripts")?g:tex_subscripts:'[0-9aeh-pr-vx() \-=+,/]' 
+"let s:tex_subscripts=exists("g:tex_subscripts")?g:tex_subscripts:'[0-9aeh-pr-vx() \-=+,/]'
 fun s:SuperSubChar(leader,patStr,ccharStr)
   if a:leader=='\^'
     let l:group='texSuperscript'
@@ -153,7 +153,7 @@ exe 'syn match texSuperscript "\^{\%('..s:tex_superscripts..'\|\\\%('..join(s:Su
 syn match texMathSymbol '\^\%(\\math\%(rm\|sf\){\s*-\?T\s*}\|{\s*-\?\s*\\math\%(rm\|sf\){\s*-\?T\s*}\s*}\)' contained conceal contains=texSuperscripts,texStatement
 exe 'syn match texMathSymbol "\^\%(\\\%(text\|mathrm\|mbox\){'..s:tex_superscripts..'\+}\|{\s*\\\%(text\|mathrm\|mbox\){'..s:tex_superscripts..'\+}\s*}\)" contained conceal contains=texSuperscripts,texStatement'
 
-call s:SuperSubChar('_','0123456789aehijklmnoprstuvx+-/(),','₀₁₂₃₄₅₆₇₈₉ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓ₊₋ˏ₍₎,')
+call s:SuperSubChar('_','0123456789aehijklmnoprstuvx+-/()=,','₀₁₂₃₄₅₆₇₈₉ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓ₊₋ˏ₍₎₌,')
 syn match texSubscript '_\.' contained conceal cchar=.
 syn match texSubscripts '\.' contained conceal cchar=.
 call s:SuperSubCmd('_','beta','ᵦ')
