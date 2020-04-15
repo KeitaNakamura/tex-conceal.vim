@@ -81,13 +81,12 @@ hi texBoldMathText cterm=bold gui=bold
 
 " -> TeX fonts; TODO: spell check @Spell
 syn cluster texMathZoneGroup add=texFont,texMathFont
-syn cluster texFoldGroup add=texFont
 syn cluster texMatchGroup add=texFont
 fun s:texFontCharConceal(mathonly,cmd,syncname,patStr,ccharStr)
   if a:mathonly
-    exe 'syn region texMathFont matchgroup=texTypeStyle start=+\\'..a:cmd..'\s*{+  skip=+\\\\\|\\[{}]+ end=+}+  contained concealends contains=@texMathZoneGroup,'..a:syncname
+    exe 'syn region texMathFont matchgroup=texTypeStyle start="\\'..a:cmd..'\s*{"  skip="\\\\\|\\[{}]" end="}"  contained concealends contains=@texMathZoneGroup,'..a:syncname
   else
-    exe 'syn region texFont matchgroup=texTypeStyle start=+\\'..a:cmd..'\s*{+  skip=+\\\\\|\\[{}]+ end=+}+  contained concealends contains='..a:syncname
+    exe 'syn region texFont matchgroup=texTypeStyle start=+\\'..a:cmd..'\s*{+  skip=+\\\\\|\\[{}]+ end=+}+ concealends contains=@texFoldGroup,'..a:syncname
   endif
   for l:i in range(len(a:patStr))
     exe "syn match "..a:syncname.." '"..a:patStr[l:i].."' contained conceal cchar="..a:ccharStr[byteidx(a:ccharStr,l:i):byteidx(a:ccharStr,l:i+1)-1]
@@ -105,7 +104,7 @@ call s:texFontCharConceal(1,'mathsf','texFontSansSerif','','')
 " -> super/sub-scripts
 let s:tex_superscripts='[0-9a-pr-zABDEG-PRTUW() \-=+,./<>]'
 let s:tex_subscripts='[0-9aeh-pr-vx() \-=+.,/]'
-"let s:tex_subscripts=exists("g:tex_subscripts")?g:tex_subscripts:'[0-9aeh-pr-vx() \-=+,/]'
+"let s:tex_subscripts=exists("g:tex_subscripts")?g:tex_subscripts:'[0-9aeh-pr-vx() \-=+,/]' 
 fun s:SuperSubChar(leader,patStr,ccharStr)
   if a:leader=='\^'
     let l:group='texSuperscript'
