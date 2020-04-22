@@ -11,7 +11,7 @@ syn match texMathSymbol '\\rightarrow\>' contained conceal cchar=→
 syn match texMathSymbol '\\leftarrow\>' contained conceal cchar=←
 syn match texMathSymbol '\\emptyset\>' contained conceal cchar=Ø
 syn match texMathSymbol '\\varphi\>' contained conceal cchar=φ
-"syn match texMathSymbol '\\phi\>' contained conceal cchar=Φ " difference with '\Phi' ?
+"syn match texMathSymbol '\\phi\>' contained conceal cchar=Φ " different with '\Phi' ?
 syn match texMathSymbol '\\langle\>\s*' contained conceal cchar=⟨
 syn match texMathSymbol '\s*\\rangle\>' contained conceal cchar=⟩
 syn match texMathSymbol '\\\\' contained conceal cchar=⏎
@@ -87,10 +87,11 @@ fun s:texFontCharConceal(mathonly,cmd,syncname,patStr,ccharStr)
   if a:mathonly
     exe 'syn region texMathFont matchgroup=texTypeStyle start="\\'..a:cmd..'\s*{"  skip="\\\\\|\\[{}]" end="}"  contained concealends contains=@texMathZoneGroup,'..a:syncname..' containedin=texMathMatcher'
   else
-    exe 'syn region texFont matchgroup=texTypeStyle start=+\\'..a:cmd..'\s*{+  skip=+\\\\\|\\[{}]+ end=+}+ concealends contains=@texFoldGroup,'..a:syncname..' containedin=texMathMatcher'
+    exe 'syn region texFont matchgroup=texTypeStyle start="\\'..a:cmd..'\s*{"  skip="\\\\\|\\[{}]" end="}" concealends contains=@texFoldGroup,'..a:syncname..' containedin=texMathMatcher'
   endif
   for l:i in range(len(a:patStr))
     exe "syn match "..a:syncname.." '"..a:patStr[l:i].."' contained conceal cchar="..a:ccharStr[byteidx(a:ccharStr,l:i):byteidx(a:ccharStr,l:i+1)-1]
+    " -> a:ccharStr usually unicode array
   endfor
 endfun
 call s:texFontCharConceal(0,'textsc','texFontSmCap','abcdefghijklmnopqrstuvwxyz','ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ')
@@ -136,7 +137,7 @@ syn match texSuperscript '\^\.' contained conceal cchar=˙
 syn match texSuperscripts '\.' contained conceal cchar=˙
 call s:SuperSubCmd('\^','vee','ᵛ')
 call s:SuperSubCmd('\^','top','ᵀ')
-call s:SuperSubCmd('\^','ast\|star\|times','˟')
+call s:SuperSubCmd('\^','\%(ast\|star\|times\)','˟')
 call s:SuperSubCmd('\^','alpha','ᵅ')
 call s:SuperSubCmd('\^','beta','ᵝ')
 call s:SuperSubCmd('\^','gamma','ᵞ')
@@ -144,7 +145,8 @@ call s:SuperSubCmd('\^','delta','ᵟ')
 call s:SuperSubCmd('\^','epsilon','ᵋ')
 call s:SuperSubCmd('\^','theta','ᶿ')
 call s:SuperSubCmd('\^','iota','ᶥ')
-call s:SuperSubCmd('\^','Phi','ᶲ')
+call s:SuperSubCmd('\^','[pP]hi','ᶲ')
+"call s:SuperSubCmd('\^','\%(var\)\?phi','ᵠ')
 call s:SuperSubCmd('\^','varphi','ᵠ')
 call s:SuperSubCmd('\^','chi','ᵡ')
 "call s:SuperSubCmd('\^','nu','ᵛ')
@@ -157,8 +159,8 @@ call s:SuperSubChar('_','0123456789aehijklmnoprstuvx+-/()=,','₀₁₂₃₄₅
 syn match texSubscript '_\.' contained conceal cchar=.
 syn match texSubscripts '\.' contained conceal cchar=.
 call s:SuperSubCmd('_','beta','ᵦ')
-call s:SuperSubCmd('_','delta','ᵨ')
-call s:SuperSubCmd('_','phi','ᵩ')
+call s:SuperSubCmd('_','rho','ᵨ')
+call s:SuperSubCmd('_','\%(var\)\?phi','ᵩ')
 call s:SuperSubCmd('_','gamma','ᵧ')
 call s:SuperSubCmd('_','chi','ᵪ')
 "call s:SuperSubCmd('_','nu','ᵥ')
