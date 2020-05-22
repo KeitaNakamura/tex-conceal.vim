@@ -22,7 +22,7 @@ or
 Plug   'KeitaNakamura/tex-conceal.vim', {'for': 'tex'} " for VimPlug
 ```
 
-## Recommend settings
+## Recommended settings
 
 ```vim:~/.vimrc
 set conceallevel=2
