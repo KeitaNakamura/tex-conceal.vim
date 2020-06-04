@@ -14,7 +14,6 @@ syn match texMathSymbol '\\varphi\>' contained conceal cchar=φ
 "syn match texMathSymbol '\\phi\>' contained conceal cchar=Φ " different with '\Phi' ?
 syn match texMathSymbol '\\langle\>\s*' contained conceal cchar=⟨
 syn match texMathSymbol '\s*\\rangle\>' contained conceal cchar=⟩
-syn match texMathSymbol '\\\\' contained conceal cchar=⏎
 
 " logical symbols
 syn match texMathSymbol '\\lor\>' contained conceal cchar=∨
@@ -35,6 +34,7 @@ syn match texMathSymbol '\\R\>' contained conceal cchar=ℝ
 
 syn match texSpecialChar '\\#' contained conceal cchar=#
 
+syn match texStatement '\\\\' contained conceal cchar=⏎
 syn match texStatement '``' contained conceal cchar=“
 syn match texStatement '\'\'' contained conceal cchar=”
 syn match texStatement '\\item\>' contained conceal cchar=•
@@ -64,12 +64,15 @@ syn match texMathSymbol '\\qedhere\>' contained conceal cchar=□
 if !exists("g:tex_nospell") || !g:tex_nospell
   syn region texMathText matchgroup=texStatement start='\\\%(\%(inter\)\=mathrm\)\s*{'     end='}' concealends keepend contains=@texFoldGroup containedin=texMathMatcher
   syn region texMathText matchgroup=texStatement start='\\\%(\%(inter\)\=text\|mbox\)\s*{' end='}' concealends keepend contains=@texFoldGroup,@Spell containedin=texMathMatcher
+  syn region texMathText matchgroup=texStatement start='\\fbox\s*{' end='}' contains=@texFoldGroup,@Spell containedin=texMathMatcher
+  " -> "\%([hvsmf]\|make\|save\|frame\|\par\|raise\)box" ref: https://tex.stackexchange.com/questions/83930/
 else
   syn region texMathText matchgroup=texStatement start='\\\%(\%(inter\)\=text\|mbox\|mathrm\)\s*{' end='}' concealends keepend contains=@texFoldGroup containedin=texMathMatcher
+  syn region texMathText matchgroup=texStatement start='\\fbox\s*{' end='}' contains=@texFoldGroup containedin=texMathMatcher
 endif
 
 syn region texBoldMathText  matchgroup=texStatement start='\\\%(mathbf\|bm\|symbf\|pmb\|boldsymbol\){' end='}' concealends contains=@texMathZoneGroup containedin=texMathMatcher
-syn region texMathOperName  matchgroup=texTypeStyle start='\\\%(operatorname\*\?\|mathop\){'  skip="\\\\\|\\[{}]" end='}'  contained concealends contains=@texMathZoneGroup
+syn region texMathOperName  matchgroup=texTypeStyle start='\\\%(operatorname\*\?\|math\%(op\|bin\)\){'  skip="\\[\\{}]" end='}'  contained concealends contains=@texMathZoneGroup
 syn cluster texMathZoneGroup add=texBoldMathText,texMathOperName
 
 syn region texBoldItalStyle matchgroup=texTypeStyle start="\\emph\s*{" end="}" concealends contains=@texItalGroup
@@ -85,9 +88,9 @@ syn cluster texFoldGroup add=texFont
 syn cluster texMatchGroup add=texFont
 fun s:texFontCharConceal(mathonly,cmd,syncname,patStr,ccharStr)
   if a:mathonly
-    exe 'syn region texMathFont matchgroup=texTypeStyle start="\\'..a:cmd..'\s*{"  skip="\\\\\|\\[{}]" end="}"  contained concealends contains=@texMathZoneGroup,'..a:syncname..' containedin=texMathMatcher'
+    exe 'syn region texMathFont matchgroup=texTypeStyle start="\\'..a:cmd..'\s*{"  skip="\\[\\{}]" end="}"  contained concealends contains=@texMathZoneGroup,'..a:syncname..' containedin=texMathMatcher'
   else
-    exe 'syn region texFont matchgroup=texTypeStyle start="\\'..a:cmd..'\s*{"  skip="\\\\\|\\[{}]" end="}" concealends contains=@texFoldGroup,'..a:syncname..' containedin=texMathMatcher'
+    exe 'syn region texFont matchgroup=texTypeStyle start="\\'..a:cmd..'\s*{"  skip="\\[\\{}]" end="}" concealends contains=@texFoldGroup,'..a:syncname..' containedin=texMathMatcher'
   endif
   for l:i in range(len(a:patStr))
     exe "syn match "..a:syncname.." '"..a:patStr[l:i].."' contained conceal cchar="..a:ccharStr[byteidx(a:ccharStr,l:i):byteidx(a:ccharStr,l:i+1)-1]
@@ -104,16 +107,20 @@ call s:texFontCharConceal(0,'textsf','texFontSansSerif','ABCDEFGHIJKLMNOPQRSTUVW
 call s:texFontCharConceal(1,'mathsf','texFontSansSerif','','')
 
 " -> super/sub-scripts
-let s:tex_superscripts='[0-9a-pr-zABDEG-PRTUW() \-=+,./<>]'
-let s:tex_subscripts='[0-9aeh-pr-vx() \-=+.,/]'
-"let s:tex_subscripts=exists("g:tex_subscripts")?g:tex_subscripts:'[0-9aeh-pr-vx() \-=+,/]'
+let s:tex_superscripts=get(g:, 'tex_superscripts', '[0-9a-pr-zABDEG-PRTUW() \-=+,./<>]')
+let s:tex_subscripts=get(g:, 'tex_subscripts', '[0-9aeh-pr-vx() \-=+.,/]')
 fun s:SuperSubChar(leader,patStr,ccharStr)
   if a:leader=='\^'
     let l:group='texSuperscript'
+    let l:allowed=s:tex_superscripts
   elseif a:leader=='_'
     let l:group='texSubscript'
+    let l:allowed=s:tex_subscripts
   endif
   for l:i in range(len(a:patStr))
+    if a:patStr[l:i] !~# l:allowed
+      continue
+    endif
     let l:cchar=a:ccharStr[byteidx(a:ccharStr,l:i):byteidx(a:ccharStr,l:i+1)-1]
     exe "syn match "..l:group.." '"..a:leader..a:patStr[l:i].."' contained conceal cchar="..l:cchar
     exe "syn match "..l:group.."s '"..a:patStr[l:i].."' contained conceal cchar="..l:cchar
@@ -136,7 +143,7 @@ call s:SuperSubChar('\^','0123456789abcdefghijklmnoprstuvwxyzABDEGHIJKLMNOPRTUW+
 syn match texSuperscript '\^\.' contained conceal cchar=˙
 syn match texSuperscripts '\.' contained conceal cchar=˙
 call s:SuperSubCmd('\^','vee','ᵛ')
-call s:SuperSubCmd('\^','top','ᵀ')
+call s:SuperSubCmd('\^','\%(top\|intercal\)','ᵀ')
 call s:SuperSubCmd('\^','\%(ast\|star\|times\)','˟')
 call s:SuperSubCmd('\^','alpha','ᵅ')
 call s:SuperSubCmd('\^','beta','ᵝ')
