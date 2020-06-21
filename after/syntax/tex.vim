@@ -36,7 +36,7 @@ syn match texSpecialChar '\\#' contained conceal cchar=#
 
 syn match texStatement '\\\\' contained conceal cchar=⏎
 syn match texStatement '``' contained conceal cchar=“
-syn match texStatement '\'\'' contained conceal cchar=”
+syn match texStatement +''+ contained conceal cchar=”
 syn match texStatement '\\item\>' contained conceal cchar=•
 syn match texStatement '\\ldots\>' contained conceal cchar=…
 syn match texStatement '\\quad\>' contained conceal cchar=  
@@ -48,6 +48,7 @@ syn match texDelimiter '\\}' contained conceal cchar=}
 syn match texMathSymbol '\\setminus\>' contained conceal cchar=\
 syn match texMathSymbol '\\coloneqq\>' contained conceal cchar=≔
 syn match texMathSymbol '\\colon\>' contained conceal cchar=:
+" syn match texMathSymbol '\s' contained conceal
 syn match texMathSymbol '\\:' contained conceal cchar= 
 syn match texMathSymbol '\\;' contained conceal cchar= 
 syn match texMathSymbol '\\,' contained conceal cchar= 
@@ -83,6 +84,8 @@ hi texBoldMathText cterm=bold gui=bold
 " set ambiwidth=single
 
 " -> TeX fonts; TODO: spell check @Spell
+" -> applied only to letters in {}; to format "\mathbb R" etc.: 
+"  :%s/\\math\a\{2,4}\zs\s\+\(\a\)/{\1}/gec
 syn cluster texMathZoneGroup add=texFont,texMathFont
 syn cluster texFoldGroup add=texFont
 syn cluster texMatchGroup add=texFont
@@ -107,7 +110,7 @@ call s:texFontCharConceal(0,'textsf','texFontSansSerif','ABCDEFGHIJKLMNOPQRSTUVW
 call s:texFontCharConceal(1,'mathsf','texFontSansSerif','','')
 
 " -> super/sub-scripts
-let s:tex_superscripts=get(g:, 'tex_superscripts', '[0-9a-pr-zABDEG-PRTUW() \-=+,./<>]')
+let s:tex_superscripts=get(g:, 'tex_superscripts', '[0-9a-pr-zABDEG-PRTUW() \-=+,:;./<>]')
 let s:tex_subscripts=get(g:, 'tex_subscripts', '[0-9aeh-pr-vx() \-=+.,/]')
 fun s:SuperSubChar(leader,patStr,ccharStr)
   if a:leader=='\^'
@@ -139,7 +142,7 @@ fun s:SuperSubCmd(leader,cmd,cchar)
   exe 'syn match tex'..l:group..'scripts "\\'..a:cmd..'\>" contained conceal cchar='..a:cchar
 endfun
 
-call s:SuperSubChar('\^','0123456789abcdefghijklmnoprstuvwxyzABDEGHIJKLMNOPRTUW+-<>/()=','⁰¹²³⁴⁵⁶⁷⁸⁹ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻᴬᴮᴰᴱᴳᴴᴵᴶᴷᴸᴹᴺᴼᴾᴿᵀᵁᵂ⁺⁻˂˃ˊ⁽⁾˭')
+call s:SuperSubChar('\^','0123456789abcdefghijklmnoprstuvwxyzABDEGHIJKLMNOPRTUW+-<>/()=,:;','⁰¹²³⁴⁵⁶⁷⁸⁹ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖʳˢᵗᵘᵛʷˣʸᶻᴬᴮᴰᴱᴳᴴᴵᴶᴷᴸᴹᴺᴼᴾᴿᵀᵁᵂ⁺⁻˂˃ˊ⁽⁾˭︐︓︔')
 syn match texSuperscript '\^\.' contained conceal cchar=˙
 syn match texSuperscripts '\.' contained conceal cchar=˙
 call s:SuperSubCmd('\^','vee','ᵛ')
@@ -171,5 +174,7 @@ call s:SuperSubCmd('_','\%(var\)\?phi','ᵩ')
 call s:SuperSubCmd('_','gamma','ᵧ')
 call s:SuperSubCmd('_','chi','ᵪ')
 "call s:SuperSubCmd('_','nu','ᵥ')
+call s:SuperSubCmd('_','cdot','.')
+call s:SuperSubCmd('_','[cl]\?dots','…')
 exe 'syn match texSubscript "_{\%('..s:tex_subscripts..'\|\\\%('..join(s:SubCmdList,'\|')..'\)\>\)\+}" contained conceal contains=texSubscripts'
 exe 'syn match texMathSymbol "_\%(\\\%(text\|mathrm\|mbox\){'..s:tex_subscripts..'\+}\|{\s*\\\%(text\|mathrm\|mbox\){'..s:tex_subscripts..'\+}\s*}\)" contained conceal contains=texSubscripts,texStatement'
