@@ -14,19 +14,11 @@ This plugin extends the Conceal feature of Vim for LaTeX.
 ### Output
 <img src="https://github.com/KeitaNakamura/tex-conceal.vim/blob/master/output.png" width="800">
 
-## Instllation
+## Installation
 
 ```vim:~/.vimrc
 Plugin 'KeitaNakamura/tex-conceal.vim'                 " for Vundle
-or
 Plug   'KeitaNakamura/tex-conceal.vim', {'for': 'tex'} " for VimPlug
-```
-
-## Recommended settings
-
-```vim:~/.vimrc
-set conceallevel=2
-let g:tex_conceal="abdgm"
 ```
 
 ## Super/sub-scrips
@@ -39,3 +31,10 @@ let g:tex_subscripts= "[0-9aehijklmnoprstuvx,+-/().]"
 ```
 
 See `:h tex-conceal` in more detail.
+
+## Recommended settings
+
+```vim:~/.vimrc
+set conceallevel=2
+let g:tex_conceal="abdgm"
+```
