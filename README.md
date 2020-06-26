@@ -21,7 +21,9 @@ Plugin 'KeitaNakamura/tex-conceal.vim'                 " for Vundle
 Plug   'KeitaNakamura/tex-conceal.vim', {'for': 'tex'} " for VimPlug
 ```
 
-## Super/sub-scrips
+## Options
+
+### Super/sub-scrips
 
 To avoid having inscrutable utf-8 glyphs appear, set `g:tex_superscripts` and `g:tex_subscripts`:
 
@@ -31,6 +33,14 @@ let g:tex_subscripts= "[0-9aehijklmnoprstuvx,+-/().]"
 ```
 
 See `:h tex-conceal` in more detail.
+
+### Fraction
+
+To conceal fraction (½⅓⅔¼⅕⅖⅗⅘⅙⅚⅛⅜⅝⅞)
+
+```vim:~/.vimrc
+let g:tex_conceal_frac=1
+```
 
 ## Recommended settings
 
