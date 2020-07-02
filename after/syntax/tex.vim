@@ -23,7 +23,6 @@ syn match texMathSymbol '\\implies\>' contained conceal cchar=⇒
 syn match texMathSymbol '\\impliedby\>' contained conceal cchar=⇐
 syn match texMathSymbol '\\geqslant\>' contained conceal cchar=⩾
 syn match texMathSymbol '\\leqslant\>' contained conceal cchar=⩽
-syn match texMathSymbol '\\frac\s*\%(1\s*2\|{1}{2}\)' contained conceal cchar=½
 
 " \mathbb characters
 syn match texMathSymbol '\\C\>' contained conceal cchar=ℂ
@@ -56,17 +55,35 @@ syn match texMathSymbol '\\ ' contained conceal cchar=
 syn match texMathSymbol '\\quad\>' contained conceal cchar=  
 syn match texMathSymbol '\\qquad\>' contained conceal cchar=    
 syn match texMathSymbol '\\sqrt\>\s*' contained conceal cchar=√
+syn match texMathSymbol '\\sqrt\[3]' contained conceal cchar=∛
+syn match texMathSymbol '\\sqrt\[4]' contained conceal cchar=∜
 syn match texMathSymbol '\\\!' contained conceal
 syn match texMathSymbol '\\where\>' contained conceal cchar=|
 syn match texMathSymbol '\\square\>' contained conceal cchar=□
 syn match texMathSymbol '\\qedhere\>' contained conceal cchar=□
+
+if get(g:, 'tex_conceal_frac', 0)
+  syn match texMathSymbol '\\[dt]\?frac\%(1\|{1}\)\%(2\|{2}\)' contained conceal cchar=½
+  syn match texMathSymbol '\\[dt]\?frac\%(1\|{1}\)\%(3\|{3}\)' contained conceal cchar=⅓
+  syn match texMathSymbol '\\[dt]\?frac\%(2\|{2}\)\%(3\|{3}\)' contained conceal cchar=⅔
+  syn match texMathSymbol '\\[dt]\?frac\%(1\|{1}\)\%(4\|{4}\)' contained conceal cchar=¼
+  syn match texMathSymbol '\\[dt]\?frac\%(1\|{1}\)\%(5\|{5}\)' contained conceal cchar=⅕
+  syn match texMathSymbol '\\[dt]\?frac\%(2\|{2}\)\%(5\|{5}\)' contained conceal cchar=⅖
+  syn match texMathSymbol '\\[dt]\?frac\%(3\|{3}\)\%(5\|{5}\)' contained conceal cchar=⅗
+  syn match texMathSymbol '\\[dt]\?frac\%(4\|{4}\)\%(5\|{5}\)' contained conceal cchar=⅘
+  syn match texMathSymbol '\\[dt]\?frac\%(1\|{1}\)\%(6\|{6}\)' contained conceal cchar=⅙
+  syn match texMathSymbol '\\[dt]\?frac\%(5\|{5}\)\%(6\|{6}\)' contained conceal cchar=⅚
+  syn match texMathSymbol '\\[dt]\?frac\%(1\|{1}\)\%(8\|{8}\)' contained conceal cchar=⅛
+  syn match texMathSymbol '\\[dt]\?frac\%(3\|{3}\)\%(8\|{8}\)' contained conceal cchar=⅜
+  syn match texMathSymbol '\\[dt]\?frac\%(5\|{5}\)\%(8\|{8}\)' contained conceal cchar=⅝
+  syn match texMathSymbol '\\[dt]\?frac\%(7\|{7}\)\%(8\|{8}\)' contained conceal cchar=⅞
+end
 
 " hide \text delimiter etc inside math mode
 if !exists("g:tex_nospell") || !g:tex_nospell
   syn region texMathText matchgroup=texStatement start='\\\%(\%(inter\)\=mathrm\)\s*{'     end='}' concealends keepend contains=@texFoldGroup containedin=texMathMatcher
   syn region texMathText matchgroup=texStatement start='\\\%(\%(inter\)\=text\|mbox\)\s*{' end='}' concealends keepend contains=@texFoldGroup,@Spell containedin=texMathMatcher
   syn region texMathText matchgroup=texStatement start='\\fbox\s*{' end='}' contains=@texFoldGroup,@Spell containedin=texMathMatcher
-  " -> "\%([hvsmf]\|make\|save\|frame\|\par\|raise\)box" ref: https://tex.stackexchange.com/questions/83930/
 else
   syn region texMathText matchgroup=texStatement start='\\\%(\%(inter\)\=text\|mbox\|mathrm\)\s*{' end='}' concealends keepend contains=@texFoldGroup containedin=texMathMatcher
   syn region texMathText matchgroup=texStatement start='\\fbox\s*{' end='}' contains=@texFoldGroup containedin=texMathMatcher
@@ -83,7 +100,7 @@ hi texBoldMathText cterm=bold gui=bold
 
 " set ambiwidth=single
 
-" -> TeX fonts; TODO: spell check @Spell
+" -> TeX fonts; 
 " -> applied only to letters in {}; to format "\mathbb R" etc.: 
 "  :%s/\\math\a\{2,4}\zs\s\+\(\a\)/{\1}/gec
 syn cluster texMathZoneGroup add=texFont,texMathFont
