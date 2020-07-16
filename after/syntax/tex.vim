@@ -9,12 +9,16 @@ syn match texMathSymbol '\\Rightarrow\>' contained conceal cchar=⇒
 syn match texMathSymbol '\\Leftarrow\>' contained conceal cchar=⇐
 syn match texMathSymbol '\\rightarrow\>' contained conceal cchar=→
 syn match texMathSymbol '\\leftarrow\>' contained conceal cchar=←
+syn match texMathSymbol '\\longleftrightarrow\>' contained conceal cchar=⟷
 syn match texMathSymbol '\\emptyset\>' contained conceal cchar=Ø
+syn match texMathSymbol '\\varnothing\>' contained conceal cchar=∅
 syn match texMathSymbol '\\varphi\>' contained conceal cchar=φ
 syn match texMathSymbol '\\phi\>' contained conceal cchar=Φ
 syn match texMathSymbol '\\langle\>\s*' contained conceal cchar=⟨
 syn match texMathSymbol '\s*\\rangle\>' contained conceal cchar=⟩
 syn match texMathSymbol '\\\\' contained conceal cchar=⏎
+syn match texMathSymbol '\\lVert\>' contained conceal cchar=‖
+syn match texMathSymbol '\\rVert\>' contained conceal cchar=‖
 
 " logical symbols
 syn match texMathSymbol '\\lor\>' contained conceal cchar=∨
@@ -196,6 +200,10 @@ syn match texStatement '\\item\>' contained conceal cchar=•
 syn match texStatement '\\ldots' contained conceal cchar=…
 syn match texStatement '\\quad' contained conceal cchar=  
 syn match texStatement '\\qquad' contained conceal cchar=    
+syn match texStatement '\\:' contained conceal cchar= 
+syn match texStatement '\\;' contained conceal cchar= 
+syn match texStatement '\\,' contained conceal cchar= 
+syn match texStatement '\\ ' contained conceal cchar= 
 "syn match texStatement '\\\[' contained conceal cchar=⟦
 "syn match texStatement '\\\]' contained conceal cchar=⟧
 syn match texDelimiter '\\{' contained conceal cchar={
@@ -213,6 +221,7 @@ syn match texMathSymbol '\\sqrt' contained conceal cchar=√
 syn match texMathSymbol '\\sqrt\[3]' contained conceal cchar=∛
 syn match texMathSymbol '\\sqrt\[4]' contained conceal cchar=∜
 syn match texMathSymbol '\\\!' contained conceal
+syn match texMathSymbol '{}' contained conceal cchar= 
 
 if !exists('g:tex_conceal_frac')
   let g:tex_conceal_frac = 0
