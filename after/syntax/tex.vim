@@ -247,8 +247,11 @@ syn cluster texMathZoneGroup add=texBoldMathText
 
 syn region texBoldItalStyle matchgroup=texTypeStyle start="\\emph\s*{" end="}" concealends contains=@texItalGroup
 syn region texItalStyle  matchgroup=texTypeStyle start="\\emph\s*{" end="}" concealends contains=@texItalGroup
+syn region texMatcher matchgroup=texTypeStyle start="\\\%(underline\|uline\){" end="}" concealends contains=@texItalGroup
 
 hi texBoldMathText cterm=bold gui=bold
+hi texUnderStyle cterm=underline gui=underline
+match texUnderStyle /\\\%(underline\|uline\){\zs\(.\([^\\]}\)\@<!\)\+\ze}/
 
 " set ambiwidth=single
 
