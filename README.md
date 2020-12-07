@@ -24,7 +24,7 @@ Plug   'KeitaNakamura/tex-conceal.vim', {'for': 'tex'} " for VimPlug
 ### For vimtex user
 
 [vimtex](https://github.com/lervag/vimtex) had used its own conceal feature from v2.
-Those changes breaks this plugin for now.
+Those changes break this plugin for now.
 So you should choose vimtex v2 or the latest version 1.6 that tex-conceal works.
 
 ```vim
