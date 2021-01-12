@@ -240,12 +240,16 @@ end
 if !exists("g:tex_nospell") || !g:tex_nospell
   syn region texMathText matchgroup=texStatement start='\\\%(\%(inter\)\=mathrm\)\s*{'     end='}' concealends keepend contains=@texFoldGroup containedin=texMathMatcher
   syn region texMathText matchgroup=texStatement start='\\\%(\%(inter\)\=text\|mbox\)\s*{' end='}' concealends keepend contains=@texFoldGroup,@Spell containedin=texMathMatcher
+  syn region texMathTypewriter matchgroup=texStatement start="\\\%(\%(inter\)\=texttt\)\s*{" end="}" concealends keepend contains=@texFoldGroup containedin=texMathMatcher
 else
   syn region texMathText matchgroup=texStatement start='\\\%(\%(inter\)\=text\|mbox\|mathrm\)\s*{' end='}' concealends keepend contains=@texFoldGroup containedin=texMathMatcher
 endif
 
 syn region texBoldMathText  matchgroup=texStatement start='\\\%(mathbf\|bm\|symbf\|pmb\){' end='}' concealends contains=@texMathZoneGroup containedin=texMathMatcher
 syn cluster texMathZoneGroup add=texBoldMathText
+
+syn region texMathTypewriter matchgroup=texStatement start="\\mathtt\s*{" end="}" concealends keepend contains=@texMathZoneGroup containedin=texMathMatcher
+syn cluster texMathZoneGroup add=texMathTypewriter
 
 syn region texBoldItalStyle matchgroup=texTypeStyle start="\\emph\s*{" end="}" concealends contains=@texItalGroup
 syn region texItalStyle  matchgroup=texTypeStyle start="\\emph\s*{" end="}" concealends contains=@texItalGroup
