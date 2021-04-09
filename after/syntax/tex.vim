@@ -4,6 +4,16 @@ endif
 
 " Original file is https://github.com/wjakob/wjakob.vim/blob/master/after/syntax/tex.vim
 
+" integrals
+syn match texMathSymbol '\\intop\>' contained conceal cchar=∫
+syn match texMathSymbol '\\iint\>' contained conceal cchar=∬
+syn match texMathSymbol '\\iiint\>' contained conceal cchar=∭
+syn match texMathSymbol '\\iiiint\>' contained conceal cchar=⨌
+syn match texMathSymbol '\\oiint\>' contained conceal cchar=∯
+syn match texMathSymbol '\\oiiint\>' contained conceal cchar=∰
+syn match texMathSymbol '\\varointclockwise\>' contained conceal cchar=∲
+syn match texMathSymbol '\\ointctrclockwise\>' contained conceal cchar=∳
+
 " more reasonably sized symbols that were already defined
 syn match texMathSymbol '\\Rightarrow\>' contained conceal cchar=⇒
 syn match texMathSymbol '\\Leftarrow\>' contained conceal cchar=⇐
