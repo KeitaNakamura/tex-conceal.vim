@@ -4,14 +4,7 @@ endif
 
 " Original file is https://github.com/wjakob/wjakob.vim/blob/master/after/syntax/tex.vim
 
-" more reasonably sized symbols that were already defined
-syn match texMathSymbol '\\Rightarrow\>' contained conceal cchar=⇒
-syn match texMathSymbol '\\Leftarrow\>' contained conceal cchar=⇐
-syn match texMathSymbol '\\rightarrow\>' contained conceal cchar=→
-syn match texMathSymbol '\\leftarrow\>' contained conceal cchar=←
-syn match texMathSymbol '\\emptyset\>' contained conceal cchar=Ø
-syn match texMathSymbol '\\varphi\>' contained conceal cchar=φ
-syn match texMathSymbol '\\phi\>' contained conceal cchar=Φ
+" not defined in vim/runtime/syntax/tex.vim
 syn match texMathSymbol '\\langle\>\s*' contained conceal cchar=⟨
 syn match texMathSymbol '\s*\\rangle\>' contained conceal cchar=⟩
 syn match texMathSymbol '\\\\' contained conceal cchar=⏎
